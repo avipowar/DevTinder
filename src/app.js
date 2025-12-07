@@ -4,16 +4,24 @@ const express = require("express");
 const app = express();
 
 // Server Response
-// app.use("/", (req, res) => {
-//   res.send("Welcome To 7777 Port Server");
-// });
-
-app.use("/home", (req, res) => {
-  res.send("Welcome To Home Page");
+app.use("/user", (req, res) => {
+  res.send("Welcome To 7777 Port Server");
 });
 
-app.use("/About", (req, res) => {
-  res.send("Welcome To About pAGE");
+app.get("/user", (req, res) => {
+  res.send({ fistName: "Avinash", lastName: "Powar" });
+});
+
+app.post("/user", async (req, res) => {
+  res.send("Update The Database Successfully");
+});
+
+app.delete("/user", (req, res) => {
+  res.send("Deleted Successfully");
+});
+
+app.use("/", (req, res) => {
+  res.send("Welcome To 7777 Port Server");
 });
 
 // Listen Request
