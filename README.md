@@ -22,3 +22,6 @@
 
     - Learn How to Handle. One Route In Multiple Route Handlers
     - Learn Next() - Play With Code
+
+    - What is Middleware
+    - And How Express js handle the request behind the seen
