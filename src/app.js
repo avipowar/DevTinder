@@ -4,25 +4,29 @@ const express = require("express");
 const app = express();
 
 // Server Response
-app.use("/user", (req, res) => {
-  res.send("Welcome To 7777 Port Server");
-});
-
-app.get("/user", (req, res) => {
-  res.send({ fistName: "Avinash", lastName: "Powar" });
-});
-
-app.post("/user", async (req, res) => {
-  res.send("Update The Database Successfully");
-});
-
-app.delete("/user", (req, res) => {
-  res.send("Deleted Successfully");
-});
-
-app.use("/", (req, res) => {
-  res.send("Welcome To 7777 Port Server");
-});
+app.use(
+  "/user",
+  (req, res, next) => {
+    console.log("Handling The Route User 1");
+    next();
+    // res.send("This Is The First Route Handler");
+  },
+  (req, res, next) => {
+    console.log("Handling The Route User 2");
+    // res.send("This Is The 2nd Route Handler");
+    next();
+  },
+  (req, res, next) => {
+    console.log("Handling The Route User 3");
+    // res.send("This Is The 3rd Handler");
+    next();
+  },
+  (req, res, next) => {
+    console.log("Handling The Route User 4");
+    // res.send("This Is The 4th Handler");
+    next();
+  }
+);
 
 // Listen Request
 app.listen(7777, () => {

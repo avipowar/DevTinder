@@ -19,3 +19,6 @@
 
     - Go to PotsMan.com and Download It
     - What is Job Of Postman Is Its Basically Test Your APIS
+
+    - Learn How to Handle. One Route In Multiple Route Handlers
+    - Learn Next() - Play With Code
