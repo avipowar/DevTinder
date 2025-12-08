@@ -25,3 +25,6 @@
 
     - What is Middleware
     - And How Express js handle the request behind the seen
+
+    - Why is MiddleWARE
+    - How to write authentication for the Different Routes
