@@ -28,3 +28,5 @@
 
     - Why is MiddleWARE
     - How to write authentication for the Different Routes
+
+    - Learn how to handle error handlers

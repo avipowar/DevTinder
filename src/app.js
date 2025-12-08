@@ -4,20 +4,25 @@ const { adminAuth, usernAuth } = require("./middleWares/auth");
 // Create a Server
 const app = express();
 
-// Before You send The Data To ThE User First Is Authorized
-app.use("/admin", adminAuth);
-
 // Server Response
-app.get("/admin/getAllData", (req, res) => {
+
+app.get("/getUserData", (req, res) => {
+  // try {
+  console.log("come getuserSta Route");
+  throw new Error("hjakakak");
+  console.log("come getuserSta Route hahahahah");
   res.send("Data Is Send Successfully");
+  // } catch (error) {
+  //   res.status(401).send("contact the support team");
+  // }
 });
 
-app.get("/user", usernAuth, (req, res) => {
-  res.send("send all the data of user");
-});
-
-app.get("/admin/deleteUser", (req, res) => {
-  res.send("Delete User Successfully");
+app.use((err, req, res, next) => {
+  console.log("come / route");
+  if (err) {
+    res.status(401).send("contact the support team");
+  }
+  // next();
 });
 
 // Listen Request
