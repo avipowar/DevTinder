@@ -45,3 +45,5 @@
 
     - Connection made successfully but first my server is listen then db is connected this also a not a good way
     - so first db is connect then server listen th request
+
+    - create a userSchema and User model
