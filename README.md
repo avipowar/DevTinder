@@ -47,3 +47,7 @@
     - so first db is connect then server listen th request
 
     - create a userSchema and User model
+
+    - We create a POST API -> /signUp for adding data into database
+    - Then add a data into a database using POSTMAN api call
+    - Error handling using try catch
