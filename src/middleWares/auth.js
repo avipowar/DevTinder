@@ -11,7 +11,7 @@ const adminAuth = (req, res, next) => {
   }
 };
 
-const usernAuth = (req, res, next) => {
+const userAuth = (req, res, next) => {
   console.log("admin authorized checking here....");
   // Authentication Logic
   const token = "xyz";
@@ -26,5 +26,5 @@ const usernAuth = (req, res, next) => {
 
 module.exports = {
   adminAuth,
-  usernAuth,
+  userAuth,
 };

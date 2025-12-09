@@ -30,3 +30,18 @@
     - How to write authentication for the Different Routes
 
     - Learn how to handle error handlers
+
+# Database Schema and models || mongoose
+
+    - Create a cluster inside a (mongodb atlas)
+    - Get Connection string
+    - install mongodb compass
+    - connect your mongodb atlas (cluster) to your mongodb compass
+    - install Mongoose To connect your application to database
+    - Now connect your Database to your application
+
+    - Directly connect mongodb to your application is a not a good way because he return the promise
+    - So instead we made connection directly we put it inside a async await function
+
+    - Connection made successfully but first my server is listen then db is connected this also a not a good way
+    - so first db is connect then server listen th request
