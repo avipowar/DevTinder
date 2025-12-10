@@ -51,3 +51,10 @@
     - We create a POST API -> /signUp for adding data into database
     - Then add a data into a database using POSTMAN api call
     - Error handling using try catch
+
+# EP:7 Diving Into The API
+
+    - Pass Dynamic data
+    - Use Middleware (express.json) into your app to convert json => js object.
+    - Make your signup API Dynamic to receive data from end user
+    - Diff between Js Object vs Json Object

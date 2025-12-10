@@ -5,15 +5,13 @@ const User = require("./model/user");
 // Create a Server
 const app = express();
 
+// Convert JSON => Js Object (Middleware)
+app.use(express.json());
+
 // Make api call
 app.post("/singUp", async (req, res) => {
-  const user = new User({
-    firstName: "Ashish",
-    lastName: "Gaikwad",
-    emailId: "ashishgaikwad@1.com",
-    passWord: "Avi@123",
-  });
-
+  // create a new  instance of user MODAL
+  const user = new User(req.body);
   try {
     await user.save();
     res.send("User Added into Database Successfully");
