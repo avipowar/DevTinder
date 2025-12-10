@@ -24,7 +24,7 @@ app.get("/user", async (req, res) => {
   const userEmailId = req.body.emailId;
 
   try {
-    const user = await User.findOne({});
+    const user = await User.findOne({ emailId: userEmailId });
     if (!user) {
       res.status(404).send("user not found");
     }
@@ -35,7 +35,13 @@ app.get("/user", async (req, res) => {
 });
 
 app.get("/feed", async (req, res) => {
-  res.send(await User.find({}));
+  const users = await User.find({});
+
+  try {
+    res.send(users);
+  } catch (error) {
+    res.status(404).send("something went wrong");
+  }
 });
 
 connectDB()
