@@ -20,6 +20,24 @@ app.post("/singUp", async (req, res) => {
   }
 });
 
+app.get("/user", async (req, res) => {
+  const userEmailId = req.body.emailId;
+
+  try {
+    const user = await User.findOne({});
+    if (!user) {
+      res.status(404).send("user not found");
+    }
+    res.send(user);
+  } catch (error) {
+    res.status(404).send("Something went wrong");
+  }
+});
+
+app.get("/feed", async (req, res) => {
+  res.send(await User.find({}));
+});
+
 connectDB()
   .then(() => {
     console.log("Database connection is Established");

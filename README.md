@@ -56,5 +56,8 @@
 
     - Pass Dynamic data
     - Use Middleware (express.json) into your app to convert json => js object.
-    - Make your signup API Dynamic to receive data from end user
+    - Make your /signup API Dynamic to receive data from end user
     - Diff between Js Object vs Json Object
+
+    - Make API /user => get the user based on email
+    - Make API /feed => get the all the user
