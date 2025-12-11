@@ -64,4 +64,4 @@
 
     - Make API /user => delete the user
     - make API /user => Update the user
-    - Make APU /USER => delete by email id
+    - Make APU /USER => Update the user form email id
