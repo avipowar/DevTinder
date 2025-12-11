@@ -61,3 +61,7 @@
 
     - Make API /user => get the user based on email
     - Make API /feed => get the all the user
+
+    - Make API /user => delete the user
+    - make API /user => Update the user
+    - Make APU /USER => delete by email id
