@@ -65,3 +65,12 @@
     - Make API /user => delete the user
     - make API /user => Update the user
     - Make APU /USER => Update the user form email id
+
+# EP:8 Data Sanitization And Schema Validation
+
+    - Explore SchemaType Options from The Documentation
+    - Add Required, minLength, maxLength, trim, unique, lowerCase
+    - Add Default
+    - Create Custom Validation Function for gender
+    - Add timestamps to the userSchema
+    - Improve the db schema
