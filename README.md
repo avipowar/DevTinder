@@ -74,3 +74,6 @@
     - Create Custom Validation Function for gender
     - Add timestamps to the userSchema
     - Improve the db schema
+
+    - Add API level Validation On Patch Request and sigNup Post API
+    - Data Sanitizing - Add api validation for each filed

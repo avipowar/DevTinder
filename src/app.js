@@ -60,11 +60,31 @@ app.delete("/user", async (req, res) => {
 });
 
 // Update the user
-app.patch("/user", async (req, res) => {
-  const userId = req.body.userId;
+app.patch("/user/:userId", async (req, res) => {
+  const userId = req.params?.userId;
   const data = req.body;
-  console.log("user 1 is updated");
+
   try {
+    const allowUpdateTheUser = [
+      "userId",
+      "skills",
+      "gender",
+      "about",
+      "photoUrl",
+      "age",
+    ];
+
+    const isAllowUpdateTheUser = Object.keys(data).every((k) =>
+      allowUpdateTheUser.includes(k)
+    );
+
+    // console.log(isAllowUpdateTheUser);
+
+    if (!isAllowUpdateTheUser) {
+      // console.log("i am printing");
+      return res.status(400).send("Update is not allowed");
+    }
+
     await User.findByIdAndUpdate(userId, data);
     res.send("Update the User Successfully");
   } catch (error) {
@@ -73,17 +93,17 @@ app.patch("/user", async (req, res) => {
 });
 
 // Update the user with EMAIL ID
-app.patch("/updateeithemailid", async (req, res) => {
-  const emailId = req.body.emailId;
-  const data = req.body;
-  console.log("user 2 is updated");
-  try {
-    await User.findOneAndUpdate({ emailId }, data);
-    res.send("User Update Successfully");
-  } catch (error) {
-    res.send("User Is NoT Update");
-  }
-});
+// app.patch("/updateeithemailid", async (req, res) => {
+//   const emailId = req.body.emailId;
+//   const data = req.body;
+
+//   try {
+//     await User.findOneAndUpdate({ emailId }, data);
+//     res.send("User Update Successfully");
+//   } catch (error) {
+//     res.send("User Is NoT Update");
+//   }
+// });
 
 connectDB()
   .then(() => {
