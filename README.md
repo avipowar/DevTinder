@@ -77,3 +77,6 @@
 
     - Add API level Validation On Patch Request and sigNup Post API
     - Data Sanitizing - Add api validation for each filed
+
+    - Do not update the emailId, name, userId
+    - We cannot add skills more tha  10
