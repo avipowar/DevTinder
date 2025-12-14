@@ -5,6 +5,8 @@ const userSchema = new Schema({
   firstName: {
     type: String,
     required: true,
+    minLength: 4,
+    maxLength: 10,
   },
   lastName: {
     type: String,
@@ -19,10 +21,22 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+    lowercase: true,
+    trim: true,
   },
   passWord: {
     type: String,
     required: true,
+  },
+  photoUrl: {
+    type: String,
+  },
+  about: {
+    type: String,
+    default: "This is about the new user",
+  },
+  skills: {
+    type: [String],
   },
 });
 
