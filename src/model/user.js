@@ -41,9 +41,21 @@ const userSchema = new Schema(
     passWord: {
       type: String,
       required: true,
+      validate(value) {
+        if (!validator.isStrongPassword(value)) {
+          throw new Error("Invalid Password " + Value);
+        }
+      },
     },
     photoUrl: {
       type: String,
+      default:
+        "https://www.livemint.com/lm-img/img/2024/05/03/600x338/6_1714726534356_1714726618820.jpg",
+      validate(value) {
+        if (!validator.isURL(value)) {
+          throw new Error("Invalid URL " + value);
+        }
+      },
     },
     about: {
       type: String,
