@@ -80,3 +80,5 @@
 
     - Do not update the emailId, name, userId
     - We cannot add skills more tha  10
+
+    - Explore Validator library function and use validator functions for PASSWORD, EMAIL, PHOTO_URL

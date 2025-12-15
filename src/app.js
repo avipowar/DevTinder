@@ -65,14 +65,7 @@ app.patch("/user/:userId", async (req, res) => {
   const data = req.body;
 
   try {
-    const allowUpdateTheUser = [
-      "userId",
-      "skills",
-      "gender",
-      "about",
-      "photoUrl",
-      "age",
-    ];
+    const allowUpdateTheUser = ["skills", "gender", "about", "photoUrl", "age"];
 
     const isAllowUpdateTheUser = Object.keys(data).every((k) =>
       allowUpdateTheUser.includes(k)

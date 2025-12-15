@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
+const { default: isEmail } = require("validator/lib/isEmail");
 const { Schema } = mongoose;
+const validator = require("validator");
 
 const userSchema = new Schema(
   {
@@ -30,6 +32,11 @@ const userSchema = new Schema(
       unique: true,
       lowercase: true,
       trim: true,
+      validate(value) {
+        if (!validator.isEmail(value)) {
+          throw new Error("Invalid Email_Id" + value);
+        }
+      },
     },
     passWord: {
       type: String,
