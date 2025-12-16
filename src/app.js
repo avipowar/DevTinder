@@ -1,6 +1,7 @@
 const express = require("express");
 const connectDB = require("./config/database");
 const User = require("./model/user");
+const { validateSignUpData } = require("./utils/validation");
 
 // Create a Server
 const app = express();
@@ -10,13 +11,20 @@ app.use(express.json());
 
 // Make api call
 app.post("/singUp", async (req, res) => {
-  // create a new  instance of user MODAL
-  const user = new User(req.body);
   try {
+    // Validate your user
+
+    validateSignUpData(req);
+
+    // Encrypted your password with the hash
+
+    // create a new  instance of user MODAL
+    const user = new User(req.body);
+
     await user.save();
     res.send("User Added into Database Successfully");
   } catch (err) {
-    res.status(400).send("error saving the user: " + err.message);
+    res.status(400).send("ERROR : " + err.message);
   }
 });
 
