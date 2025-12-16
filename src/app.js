@@ -2,6 +2,7 @@ const express = require("express");
 const connectDB = require("./config/database");
 const User = require("./model/user");
 const { validateSignUpData } = require("./utils/validation");
+const bcrypt = require("bcrypt");
 
 // Create a Server
 const app = express();
@@ -18,8 +19,17 @@ app.post("/singUp", async (req, res) => {
 
     // Encrypted your password with the hash
 
+    const { firstName, lastName, emailId, passWord } = req.body;
+
+    const hashPassword = await bcrypt.hash(passWord, 10);
+
     // create a new  instance of user MODAL
-    const user = new User(req.body);
+    const user = new User({
+      firstName,
+      lastName,
+      emailId,
+      passWord: hashPassword,
+    });
 
     await user.save();
     res.send("User Added into Database Successfully");
