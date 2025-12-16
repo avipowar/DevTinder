@@ -38,6 +38,30 @@ app.post("/singUp", async (req, res) => {
   }
 });
 
+app.post("/login", async (req, res) => {
+  const { emailId, passWord } = req.body;
+
+  try {
+    // check emailID is Valid Or not
+    const user = await User.findOne({ emailId: emailId });
+    // const user = await User.findOne({ emailId });
+    console.log("user ", user);
+    if (!user) {
+      throw new Error("Email Id Is Wrong");
+    }
+    // check password is valid
+    const isPasswordValid = await bcrypt.compare(passWord, user.passWord);
+
+    if (isPasswordValid) {
+      res.send("User Login Successfully");
+    } else {
+      throw new Error("Password is Incorrect");
+    }
+  } catch (error) {
+    res.send("ERROR: " + error.message);
+  }
+});
+
 app.get("/user", async (req, res) => {
   const userEmailId = req.body.emailId;
 

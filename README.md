@@ -88,3 +88,5 @@
     - Before Create a new instance of User Validate your data => signUp API => Use Helper Function to do that
     - Install bcrypt package
     - Encrypt your password => Create a user with bcrypt.hash() and save the user in database with encrypted password
+
+    - make login API and Login the user
