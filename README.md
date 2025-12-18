@@ -90,3 +90,18 @@
     - Encrypt your password => Create a user with bcrypt.hash() and save the user in database with encrypted password
 
     - make login API and Login the user
+        - Also create a cookie inside the login API
+        - And inside that cookie we place JWT token
+        - and send back to the user/ client / browser
+        - browser job is store this cookie
+
+    - now making get/profile API call
+        - and read these cookie when the user make another call
+        - reading the cookie we install package is cookie.parser
+        - and verify the user using decoded message (jwt.verify() method)
+        - age get the user back
+
+    - create token
+        - for that use package is json web token
+        - create token with (jwt.sign(data, password/privatekey))
+        - send the token inside cookie

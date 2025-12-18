@@ -3,12 +3,16 @@ const connectDB = require("./config/database");
 const User = require("./model/user");
 const { validateSignUpData } = require("./utils/validation");
 const bcrypt = require("bcrypt");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 
 // Create a Server
 const app = express();
 
 // Convert JSON => Js Object (Middleware)
 app.use(express.json());
+// Convert token => Js Object (Middleware)
+app.use(cookieParser());
 
 // Make api call
 app.post("/singUp", async (req, res) => {
@@ -44,8 +48,7 @@ app.post("/login", async (req, res) => {
   try {
     // check emailID is Valid Or not
     const user = await User.findOne({ emailId: emailId });
-    // const user = await User.findOne({ emailId });
-    console.log("user ", user);
+
     if (!user) {
       throw new Error("Email Id Is Wrong");
     }
@@ -53,6 +56,11 @@ app.post("/login", async (req, res) => {
     const isPasswordValid = await bcrypt.compare(passWord, user.passWord);
 
     if (isPasswordValid) {
+      // create token
+      const token = jwt.sign({ _id: user._id }, "AVI@9764995656");
+      console.log(token);
+      // add the token to the cookie and send back the response to the user
+      res.cookie("token", token);
       res.send("User Login Successfully");
     } else {
       throw new Error("Password is Incorrect");
@@ -60,6 +68,28 @@ app.post("/login", async (req, res) => {
   } catch (error) {
     res.send("ERROR: " + error.message);
   }
+});
+
+app.get("/profile", async (req, res) => {
+  try {
+    const cookies = req.cookies;
+    const { token } = cookies;
+    if (!token) {
+      throw new Error("Invalid Token");
+    }
+
+    const decodedMessage = jwt.verify(token, "AVI@9764995656");
+    const { _id } = decodedMessage;
+
+    const user = await User.findOne({ _id: _id });
+    if (!user) {
+      throw new Error("User is does not exist");
+    }
+
+    // console.log(user);
+
+    res.send(user);
+  } catch (error) {}
 });
 
 app.get("/user", async (req, res) => {
