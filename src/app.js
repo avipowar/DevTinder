@@ -89,7 +89,9 @@ app.get("/profile", async (req, res) => {
     // console.log(user);
 
     res.send(user);
-  } catch (error) {}
+  } catch (error) {
+    res.send("ERROR: " + error.message);
+  }
 });
 
 app.get("/user", async (req, res) => {
