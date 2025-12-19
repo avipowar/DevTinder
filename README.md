@@ -105,3 +105,5 @@
         - for that use package is json web token
         - create token with (jwt.sign(data, password/privatekey))
         - send the token inside cookie
+
+    - Add AUTH Middleware
