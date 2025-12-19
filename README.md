@@ -107,3 +107,4 @@
         - send the token inside cookie
 
     - Add AUTH Middleware
+    - expire cookie and token will be set
