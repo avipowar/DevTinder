@@ -54,16 +54,15 @@ app.post("/login", async (req, res) => {
       throw new Error("Email Id Is Wrong");
     }
     // check password is valid
-    const isPasswordValid = await bcrypt.compare(passWord, user.passWord);
+    const isPasswordValid = await user.validatePassword(passWord);
 
     if (isPasswordValid) {
-      // create token
-      const token = user.getJWT();
-      console.log(token);
-      // add the token to the cookie and send back the response to the user
+      const token = await user.getJWT();
+
       res.cookie("token", token, {
         expires: new Date(Date.now() + 8 * 3600000),
       });
+
       res.send("User Login Successfully");
     } else {
       throw new Error("Password is Incorrect");
