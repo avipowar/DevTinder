@@ -108,3 +108,4 @@
 
     - Add AUTH Middleware
     - expire cookie and token will be set
+    - write helper function for token in userModel
