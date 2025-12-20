@@ -83,7 +83,7 @@
 
     - Explore Validator library function and use validator functions for PASSWORD, EMAIL, PHOTO_URL
 
-# EP:9 Encrypting Password
+# EP:9 Encrypting Password and EP:10 Authentication JWT and Cookies
 
     - Before Create a new instance of User Validate your data => signUp API => Use Helper Function to do that
     - Install bcrypt package
@@ -110,3 +110,10 @@
     - expire cookie and token will be set
     - write helper function for token in userModel
     - write helper function for password
+
+# EP: 11 Diving into the APIs and Express Router
+
+    - Think APIs for your devTinder Application
+
+    - EXPRESS ROUTER
+        - create a route for APIs using express router
