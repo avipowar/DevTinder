@@ -117,3 +117,7 @@
 
     - EXPRESS ROUTER
         - create a route for APIs using express router
+        - And make route inside in separate folder
+
+    - Create a logOut api
+    - Create a editProfile api
