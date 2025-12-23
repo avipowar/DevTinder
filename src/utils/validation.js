@@ -1,4 +1,6 @@
 const validator = require("validator");
+const User = require("../model/user");
+const crypto = require("crypto");
 
 const validateSignUpData = (req) => {
   // Destructuring
@@ -30,7 +32,52 @@ const validateProfileData = (req) => {
   return isAllowed;
 };
 
+const forgotPasswordService = async (emailId) => {
+  const user = await User.findOne({ emailId });
+
+  if (!user) {
+    throw new Error("User Not Found");
+  }
+
+  const resetToken = await crypto.randomBytes(32).toString("hex");
+
+  const hashedToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  user.resetToken = hashedToken;
+  user.resetTokenExpiryDate = Date.now() + 10 * 60 * 1000;
+
+  await user.save();
+
+  return resetToken;
+};
+
+const resetUserPassword = async (token, newPassword) => {
+  const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
+  const user = await User.findOne({
+    resetToken: hashedToken,
+    resetTokenExpiryDate: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    throw new Error("Token Invalid or expired");
+  }
+
+  user.passWord = newPassword;
+  user.resetToken = undefined;
+  user.resetTokenExpiryDate = undefined;
+
+  await user.save();
+
+  return true;
+};
+
 module.exports = {
   validateSignUpData,
   validateProfileData,
+  forgotPasswordService,
+  resetUserPassword,
 };

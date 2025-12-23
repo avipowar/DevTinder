@@ -3,6 +3,9 @@ const profileRouter = express.Router();
 const User = require("../model/user");
 const crypto = require("crypto");
 
+const { resetUserPassword } = require("../utils/validation");
+const { forgotPasswordService } = require("../utils/validation");
+
 const { userAuth } = require("../middleWares/auth");
 const { validateProfileData } = require("../utils/validation");
 
@@ -42,30 +45,14 @@ profileRouter.post("/profile/forgot-password", async (req, res) => {
   try {
     const { emailId } = req.body;
 
-    const user = await User.findOne({ emailId });
-    if (!user) {
-      return res.status(404).send("User Not Found");
-    }
-    // generate reset token
-    const resetToken = crypto.randomBytes(32).toString("hex");
-    // console.log("resetToken: " + resetToken);
-    const hashRestToken = crypto
-      .createHash("sha256")
-      .update(resetToken)
-      .digest("hex");
-    // console.log("hashRestToken: " + hashRestToken);
+    const resetToken = await forgotPasswordService(emailId);
 
-    // add expiry time
-    const resetTokenExpiry = new Date(Date.now() + 10 * 60 * 1000);
-
-    user.resetToken = hashRestToken;
-    user.resetTokenExpiryDate = resetTokenExpiry;
-
-    const dataToken = await user.save();
-
-    res.json({ message: "Reset Link Sent To EMail", resetToken });
-  } catch (error) {
-    res.send(err.message);
+    res.json({
+      message: "Reset Link Sent To EMail",
+      resetToken,
+    });
+  } catch (err) {
+    res.status(404).send(err.message);
   }
 });
 
@@ -73,26 +60,11 @@ profileRouter.post("/profile/reset-password", async (req, res) => {
   try {
     const { token, newPassword } = req.body;
 
-    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+    await resetUserPassword(token, newPassword);
 
-    const user = await User.findOne({
-      resetToken: hashedToken,
-      resetTokenExpiryDate: { $gt: Date.now() },
-    });
-
-    if (!user) {
-      return res.send("Token Invalid or expired");
-    }
-
-    user.passWord = newPassword;
-    user.resetToken = undefined;
-    user.resetTokenExpiryDate = undefined;
-
-    const data = await user.save();
-    console.log(data);
     res.send("Password reset successfully");
   } catch (error) {
-    res.send(error.message);
+    res.status(400).send(error.message);
   }
 });
 
