@@ -45,9 +45,15 @@ const userSchema = new Schema(
       required: true,
       validate(value) {
         if (!validator.isStrongPassword(value)) {
-          throw new Error("Invalid Password " + Value);
+          throw new Error("Please Enter a strong password");
         }
       },
+    },
+    resetToken: {
+      type: String,
+    },
+    resetTokenExpiryDate: {
+      type: Date,
     },
     photoUrl: {
       type: String,

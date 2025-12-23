@@ -121,3 +121,6 @@
 
     - Create a logOut api
     - Create a editProfile api
+    - create forgot password route
+        - use crypto to hash that value
+        - use comparison operator which is $gt
