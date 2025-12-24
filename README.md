@@ -130,5 +130,5 @@
 # EP: 12 Logical Database Query and Compound Indexes
 
     - Created new schema for connection request / created new model
-    - create connection api /request/send/interested/:userId and write some logic to save connection db
+    - create connection api /request/send/interested/:userId and write some logic to save data in db
     - user parm to get dynamically data from URL path
