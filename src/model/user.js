@@ -21,10 +21,9 @@ const userSchema = new Schema(
     },
     gender: {
       type: String,
-      validate(value) {
-        if (!["male", "female", "others"].includes(value)) {
-          throw new Error("Gender Data Is Not Valid");
-        }
+      enum: {
+        values: ["male", "female", "others"],
+        message: `{VALUE} Data I Not Valid`,
       },
       lowercase: true,
     },

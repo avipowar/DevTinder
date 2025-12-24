@@ -126,3 +126,7 @@
         - use comparison operator which is $gt
         - create validation function
         - create hash password using bcrypt
+
+# EP: 12 Logical Database Query and Compound Indexes
+
+    -
