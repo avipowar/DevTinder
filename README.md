@@ -124,3 +124,5 @@
     - create forgot password route
         - use crypto to hash that value
         - use comparison operator which is $gt
+        - create validation function
+        - create hash password using bcrypt

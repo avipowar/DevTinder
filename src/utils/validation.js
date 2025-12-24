@@ -1,6 +1,7 @@
 const validator = require("validator");
 const User = require("../model/user");
 const crypto = require("crypto");
+const bcrypt = require("bcrypt");
 
 const validateSignUpData = (req) => {
   // Destructuring
@@ -65,8 +66,8 @@ const resetUserPassword = async (token, newPassword) => {
   if (!user) {
     throw new Error("Token Invalid or expired");
   }
-
-  user.passWord = newPassword;
+  const hashPassword = await bcrypt.hash(newPassword, 10);
+  user.passWord = hashPassword;
   user.resetToken = undefined;
   user.resetTokenExpiryDate = undefined;
 
