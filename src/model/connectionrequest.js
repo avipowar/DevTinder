@@ -1,22 +1,27 @@
 const mongoose = require("mongoose");
 
-const connectionRequestSchema = new mongoose.Schema({
-  formUserId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-  },
-  toUserId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-  },
-  status: {
-    type: string,
-    enum: {
-      values: ["ignore", "interested", "ignore", "rejected"],
-      message: `{VALUE} is incorrect status type`,
+const connectionRequestSchema = new mongoose.Schema(
+  {
+    formUserId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+    },
+    toUserId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: {
+        values: ["ignored", "interested", "ignore", "rejected"],
+        message: `{VALUE} is incorrect status type`,
+      },
     },
   },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const ConnectionRequestSchemaModel = mongoose.model(
   "connectionRequest",

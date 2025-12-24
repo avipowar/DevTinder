@@ -15,8 +15,11 @@
     connectionRequestRouter
         - POST /request/send/interested/:userId
         - POST /request/send/ignore/:userId
+
         - POST /request/review/accepted/:userId
         - POST /request/review/rejected/:userId
+
+        - status : ["ignored", "interested", "ignore", "rejected"]
 
     userRouter
         - GET /user/connections
