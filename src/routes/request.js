@@ -8,10 +8,18 @@ requestRouter.post(
   userAuth,
   async (req, res) => {
     try {
-      const user = req.user;
+      const user = req.user._id;
       const formUserId = user;
       const toUserId = req.params.toUserId;
       const status = req.params.status;
+
+      const allowedStatus = ["ignored", "interested"];
+
+      if (!allowedStatus.includes(status)) {
+        return res
+          .status(404)
+          .json({ message: "Invalid Status type: " + status });
+      }
 
       const connectionRequest = new ConnectionRequest({
         formUserId,

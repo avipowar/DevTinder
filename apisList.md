@@ -19,7 +19,7 @@
         - POST /request/review/accepted/:userId
         - POST /request/review/rejected/:userId
 
-        - status : ["ignored", "interested", "ignore", "rejected"]
+        - status : ["ignored", "interested", "accepted", "rejected"]
 
     userRouter
         - GET /user/connections
