@@ -133,3 +133,7 @@
     - create connection api /request/send/:status/:userId and write some logic to save data in db
     - user parm to get dynamically data from URL path
     - add validation for my sen request api is allowed status type is ignored / interested
+    - add validation for
+        case 1: USER1 => (send connection req) =>  USER2 => Is allowed
+        case 2: USER1 => (again send connection req 2nd time) =>  USER2 => Is not allowed
+        case 3: USER1 <= ( send connection request) <=  USER2 => Is not allowed

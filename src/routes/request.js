@@ -8,17 +8,35 @@ requestRouter.post(
   userAuth,
   async (req, res) => {
     try {
-      const user = req.user._id;
-      const formUserId = user;
+      const user = req.user;
+      const formUserId = user._id;
       const toUserId = req.params.toUserId;
       const status = req.params.status;
 
       const allowedStatus = ["ignored", "interested"];
 
+      // check validations for status:
       if (!allowedStatus.includes(status)) {
         return res
           .status(404)
           .json({ message: "Invalid Status type: " + status });
+      }
+
+      // check validations for duplicate user and / same user we send req they do not send req to you
+      const existingConnectionRequest = await ConnectionRequest.findOne({
+        $or: [
+          { formUserId, toUserId },
+          {
+            formUserId: toUserId,
+            toUserId: formUserId,
+          },
+        ],
+      });
+
+      if (existingConnectionRequest) {
+        return res
+          .status(404)
+          .json({ message: "Connection Req Is Already Exist !!", reqcome });
       }
 
       const connectionRequest = new ConnectionRequest({
