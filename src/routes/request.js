@@ -2,6 +2,8 @@ const express = require("express");
 const { userAuth } = require("../middleWares/auth");
 const ConnectionRequest = require("../model/connectionrequest");
 const requestRouter = express.Router();
+const User = require("../model/user");
+const { Connection } = require("mongoose");
 
 requestRouter.post(
   "/request/send/:status/:toUserId",
@@ -36,7 +38,21 @@ requestRouter.post(
       if (existingConnectionRequest) {
         return res
           .status(404)
-          .json({ message: "Connection Req Is Already Exist !!", reqcome });
+          .json({ message: "Connection Req Is Already Exist !!" });
+      }
+
+      if (formUserId.toString() === toUserId) {
+        return res.status(404).json({
+          message:
+            "you cannot send connection request to yourSelf This Is Not Valid",
+        });
+      }
+
+      // check toUserId is exist or not in my Database
+      const toUser = await User.findById(toUserId);
+      // console.log(toUser);
+      if (!toUser) {
+        return res.status(404).json({ message: "User Is NOT Found " });
       }
 
       const connectionRequest = new ConnectionRequest({
@@ -48,7 +64,11 @@ requestRouter.post(
       const data = await connectionRequest.save();
 
       res.json({
-        message: user.firstName + " sent the connection request successfully!",
+        message:
+          user.firstName +
+          " sent the connection request to " +
+          toUser.firstName +
+          " successfully!",
         data,
       });
     } catch (error) {

@@ -132,8 +132,14 @@
     - Created new schema for connection request / created new model
     - create connection api /request/send/:status/:userId and write some logic to save data in db
     - user parm to get dynamically data from URL path
-    - add validation for my sen request api is allowed status type is ignored / interested
-    - add validation for
+
+    - add validation for my send request api is allowed STATUS type is ignored / interested
+
+    - add validation for connection req
         case 1: USER1 => (send connection req) =>  USER2 => Is allowed
         case 2: USER1 => (again send connection req 2nd time) =>  USER2 => Is not allowed
         case 3: USER1 <= ( send connection request) <=  USER2 => Is not allowed
+
+        case 4: USER1 => (tries to req ) => RANDOM USER (this user is not present on my DB) => THROW AN ERROR (USER NOT EXIST)
+
+        case 5: USER1 => (tries to req ) => USER1 => THROW AN ERROR (user is cannot send connection request tp yourself)
