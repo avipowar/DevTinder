@@ -146,3 +146,8 @@
 
         <!-- same case handled by schema level validation using pre("save" function (){}) -->
         case 5: USER1 => (tries to req ) => USER1 => THROW AN ERROR (user is cannot send connection request tp yourself)
+
+    - Learn MongoDB Indexes
+        - normal indexes
+        - unique indexes
+        - compound indexes
