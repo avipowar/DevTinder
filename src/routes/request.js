@@ -41,19 +41,14 @@ requestRouter.post(
           .json({ message: "Connection Req Is Already Exist !!" });
       }
 
-      if (formUserId.toString() === toUserId) {
-        return res.status(404).json({
-          message:
-            "you cannot send connection request to yourSelf This Is Not Valid",
-        });
-      }
-
       // check toUserId is exist or not in my Database
       const toUser = await User.findById(toUserId);
       // console.log(toUser);
       if (!toUser) {
         return res.status(404).json({ message: "User Is NOT Found " });
       }
+
+      // created mongoose object
 
       const connectionRequest = new ConnectionRequest({
         formUserId,

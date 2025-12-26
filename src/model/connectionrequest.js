@@ -23,6 +23,18 @@ const connectionRequestSchema = new mongoose.Schema(
   }
 );
 
+connectionRequestSchema.pre("save", function (next) {
+  const connectionRequest = this;
+  // console.log(this);
+
+  if (connectionRequest.formUserId.equals(connectionRequest.toUserId)) {
+    throw new Error(
+      "you cannot send connection request to yourSelf This Is Not Valid"
+    );
+  }
+  next();
+});
+
 const ConnectionRequestSchemaModel = mongoose.model(
   "connectionRequest",
   connectionRequestSchema

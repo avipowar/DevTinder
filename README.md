@@ -143,3 +143,6 @@
         case 4: USER1 => (tries to req ) => RANDOM USER (this user is not present on my DB) => THROW AN ERROR (USER NOT EXIST)
 
         case 5: USER1 => (tries to req ) => USER1 => THROW AN ERROR (user is cannot send connection request tp yourself)
+
+        <!-- same case handled by schema level validation using pre("save" function (){}) -->
+        case 5: USER1 => (tries to req ) => USER1 => THROW AN ERROR (user is cannot send connection request tp yourself)
