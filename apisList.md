@@ -16,8 +16,12 @@
         - POST /request/send/interested/:userId
         - POST /request/send/ignore/:userId
 
+        - Combine above two APIs : POST /request/send/:status/:userId
+
         - POST /request/review/accepted/:userId
         - POST /request/review/rejected/:userId
+
+        - Combine above two APIs : POST /request/review/:status/:userId
 
         - status : ["ignored", "interested", "accepted", "rejected"]
 

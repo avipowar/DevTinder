@@ -151,3 +151,16 @@
         - normal indexes
         - unique indexes
         - compound indexes
+
+# EP: 13 ref, Populate and Thought Process Of Writing APIs
+
+    - Create Accept/Reject APIs:  POST /request/review/:status/:userId
+
+        - Check Validation for above APIs
+
+            - check my status is accepted or rejected => is anything else apart form that throw an error
+
+            - first i will check if accepting or rejecting req user is LOGIN or not
+            - is coming req is in my database or not
+            - or my status is interested or not
+

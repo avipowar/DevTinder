@@ -1,9 +1,10 @@
 const express = require("express");
 const { userAuth } = require("../middleWares/auth");
-const ConnectionRequest = require("../model/connectionrequest");
+const ConnectionRequest = require("../model/connectionRequest");
 const requestRouter = express.Router();
 const User = require("../model/user");
 const { Connection } = require("mongoose");
+const mongoose = require("mongoose");
 
 requestRouter.post(
   "/request/send/:status/:toUserId",
@@ -68,6 +69,57 @@ requestRouter.post(
       });
     } catch (error) {
       res.status(400).send("ERROR: " + error.message);
+    }
+  }
+);
+
+requestRouter.post(
+  "/request/review/:status/:requestId",
+  userAuth,
+  async (req, res) => {
+    try {
+      const loggedInUser = req.user;
+      const { status, requestId } = req.params;
+      const comingRequestId = new mongoose.Types.ObjectId(requestId);
+
+      const allowStatus = ["accepted", "rejected"];
+
+      console.log(typeof comingRequestId); // string
+      console.log(typeof loggedInUser._id); // object
+
+      if (!allowStatus.includes(status)) {
+        return res
+          .status(404)
+          .json({ message: "Invalid Status Type: " + status });
+      }
+
+      const connectionRequest = await ConnectionRequest.findOne({
+        _id: new mongoose.Types.ObjectId(comingRequestId),
+        toUserId: loggedInUser._id,
+        status: "interested",
+      });
+      console.log(connectionRequest);
+
+      if (!connectionRequest) {
+        return res.status(404).json({
+          message: "Connection Request Not Found",
+        });
+      }
+
+      connectionRequest.status = status;
+
+      const data = await connectionRequest.save();
+
+      res.json({
+        message:
+          "Your Connection Request " +
+          status +
+          " from " +
+          loggedInUser.firstName,
+        data,
+      });
+    } catch (error) {
+      res.status(404).send("ERROR " + error.message);
     }
   }
 );
