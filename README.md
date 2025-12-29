@@ -164,7 +164,11 @@
             - is coming req is in my database or not
             - or my status is interested or not
 
-    - Create get APIs( show all the receive req getting from user ) :  - GET /user/request/receives
+    - Create get APIs( show all the receive/pending req getting from user ) :  - GET /user/request/receives
 
         - ref : tells the mongoose => this object id => which collection belongs to
         - populate : fetches the reference document => and replace with the objectId
+
+    - Create get APIs( show all the accepted ) :  - GET /user/connections
+        - map function
+        - $or [{},{}]
