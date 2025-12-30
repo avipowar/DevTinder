@@ -172,3 +172,25 @@
     - Create get APIs( show all the accepted ) :  - GET /user/connections
         - map function
         - $or [{},{}]
+
+# EP: 14 Building Full APIs and Pagination
+
+    - Create FEED APIs : GET /feed
+
+        - Show the users on ui => So my loggedInUser is make => left swap(ignored APIs call ) or right swap(interestedAPIs call )
+
+        - first i will check in my Database(connectionRequests Collection) => send req data and receive req data
+        - i will collect => all the send request and receives request
+
+        -  SELECT => IS used to choose form current document
+
+        - Set() DataStructure => find unique element => form collect send req or receive req
+        - Add all the document in set
+        - set store unique document
+
+        - use FOREACH loop =>  to travel each document apart form set document  => in User Collection => send res all the document which i get
+
+        - $and => if two condition => true => give me the document
+        - $nin => Value is not in list =>
+        - $in => value in list
+        - $ne => not equal
