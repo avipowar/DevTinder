@@ -194,3 +194,11 @@
         - $nin => Value is not in list =>
         - $in => value in list
         - $ne => not equal
+
+    - Create Pagination in my website
+
+        - Pagination:  mens divided large data into smaller pages
+
+        - Query Parameter : key value pair => passed in URL => control api behavior
+
+        - skip().limit() => we add key value pair here
