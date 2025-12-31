@@ -202,3 +202,5 @@
         - Query Parameter : key value pair => passed in URL => control api behavior
 
         - skip().limit() => we add key value pair here
+
+        - pagination alway start from page => 1
