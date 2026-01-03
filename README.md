@@ -204,3 +204,8 @@
         - skip().limit() => we add key value pair here
 
         - pagination alway start from page => 1
+
+# handle some issues
+
+    - add cors package
+    - user login successfully =>  send user info  back
