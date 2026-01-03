@@ -3,6 +3,7 @@ const authRouter = express.Router();
 const { validateSignUpData } = require("../utils/validation");
 const User = require("../model/user");
 const bcrypt = require("bcrypt");
+const { userAuth } = require("../middleWares/auth");
 
 authRouter.post("/signUp", async (req, res) => {
   try {
@@ -45,7 +46,7 @@ authRouter.post("/login", async (req, res) => {
         expires: new Date(Date.now() + 8 * 3600000),
       });
 
-      res.send("User Login Successfully");
+      res.json({ user });
     } else {
       throw new Error("Password is Incorrect");
     }

@@ -5,9 +5,12 @@ const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
 const requestRouter = require("./routes/request.js");
 const userRouter = require("./routes/user.js");
+const cors = require("cors");
 
 // Create a Server
 const app = express();
+
+app.use(cors());
 
 // Convert JSON => Js Object (Middleware)
 app.use(express.json());
