@@ -10,7 +10,12 @@ const cors = require("cors");
 // Create a Server
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 // Convert JSON => Js Object (Middleware)
 app.use(express.json());

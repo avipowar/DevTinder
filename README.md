@@ -209,3 +209,6 @@
 
     - add cors package
     - user login successfully =>  send user info  back
+    - add cors configuration => for allow request from different domain
+    - tell the backend where from the req is coming
+    - allow the req and you also save in your browser
