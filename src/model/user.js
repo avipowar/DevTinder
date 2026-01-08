@@ -15,6 +15,8 @@ const userSchema = new Schema(
     },
     lastName: {
       type: String,
+      minLength: 4,
+      maxLength: 10,
     },
     age: {
       type: Number,

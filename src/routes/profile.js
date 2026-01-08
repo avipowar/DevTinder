@@ -21,13 +21,13 @@ profileRouter.get("/profile/view", userAuth, async (req, res) => {
 
 profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
   try {
-    if (!validateProfileData(req)) {
-      throw new Error("Invalid User");
+    if (validateProfileData(req)) {
+      return res.status(401).json({ message: "Invalid User" });
     }
 
     const loggedInUser = req.user;
 
-    Object.keys(req.body).every((key) => (loggedInUser[key] = req.body[key]));
+    Object.keys(req.body).forEach((key) => (loggedInUser[key] = req.body[key]));
 
     await loggedInUser.save();
 
